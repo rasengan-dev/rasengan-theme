@@ -9,8 +9,7 @@
     ".": {
       "import": "./lib/index.js",
       "require": "./lib/index.js"
-    },
-    "./lib/styles/index.css": "./lib/styles/index.css"
+    }
   },
   "author": {
     "name": "dilane3",

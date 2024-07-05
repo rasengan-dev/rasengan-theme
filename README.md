@@ -4,64 +4,64 @@
 ![NPM Downloads](https://img.shields.io/npm/dm/%40rasenganjs%2Ftheme)
 [![GitHub license](https://img.shields.io/github/license/rasengan-dev/rasengan-theme)](https://github.com/rasengan-dev/rasengan-theme/blob/main/LICENSE)
 
-An utility component for Image which offers a lazy loading behavior with a previewing animation for enhancing UX
-
-Images are loading when they are in the viewport by default, and a previewing animation is displayed while the image is loading. But you can change that behavior as you want.
+Simple Rasengan.JS package to manage the theme of your application.
 
 ## Installation
 
-You can install the `@rasenganjs/image` package using the following command:
+You can install the `@rasenganjs/theme` package by using the following command:
 
 ```bash
-npm install @rasenganjs/image
+npm install @rasenganjs/theme
 ```
 
 or
 
 ```bash
-yarn add @rasenganjs/image
+yarn add @rasenganjs/theme
 ```
 
 ## Usage
 
-Here is an example of how you can use the `@rasenganjs/image` package:
+Here is an example of how you can use the `@rasenganjs/theme` package:
 
-### Basic Usage
+### Wrap your application with `ThemeProvider`
 
 ```tsx
-import Image from '@rasenganjs/image';
-import logo from './logo.svg';
+import { type AppProps } from "rasengan";
+import AppRouter from "@app/app.router";
+import ThemeProvider from "@rasenganjs/theme";
 
-const App = () => {
+export default function App({ Component, children }: AppProps) {
   return (
-    <Image
-      src={logo}
-      alt="Image"
-      width={400}
-      height={300}
-    />
+		<ThemeProvider>
+			<Component router={AppRouter}>{children}</Component>
+		</ThemeProvider>
+	);
+}
+
+```
+
+### Use the `useTheme` hook to get the current theme
+
+```tsx 
+import { useTheme } from "@rasenganjs/theme";
+
+const Card = () => {
+  const { theme, actualTheme, setTheme, isDark } = useTheme();
+
+  return (
+    <div>{/* Code here */}</div>
   );
 };
 ```
 
-### With `URI`
+| Property | Type | Description | Values |
+| --- | --- | --- | --- |
+| `theme` | `string` | The current theme | `light` or `dark` or `system` |
+| `actualTheme` | `string` | The actual theme | `light` or `dark` |
+| `setTheme` | `(theme: string) => void` | A function to set the theme | - |
+| `isDark` | `boolean` | A boolean that indicates if the current theme is dark | `true` or `false` |
 
-```tsx
-import Image from '@rasenganjs/image';
-
-const App = () => {
-  return (
-    <Image
-      src={{ uri: "https://example.com/image.jpg" }}
-      alt="Image"
-      width={400}
-      height={300}
-    />
-  );
-};
-```
-
-Learn more on the [Documentation](https://rasengan.dev/docs/core/optimizing/images) website.
 
 ## Community
 
@@ -71,7 +71,7 @@ We also have a [Twitter](https://twitter.com/rasenganjs) account where you can f
 
 ## License
 
-Rasengan.js is [MIT licensed](https://github.com/rasengan-dev/rasengan-image/blob/main/LICENSE).
+Rasengan.js is [MIT licensed](https://github.com/rasengan-dev/rasengan-theme/blob/main/LICENSE).
 
 ## Authors
 
